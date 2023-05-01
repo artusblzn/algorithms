@@ -1,8 +1,6 @@
 #ifndef POINT_H
 #define POINT_H
 
-#define STACK_SIZE 6
-
 typedef struct stack {
   int *items;
   int top;
