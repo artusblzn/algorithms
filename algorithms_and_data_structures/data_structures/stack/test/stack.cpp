@@ -7,7 +7,7 @@ extern "C" {
 /*
   Tests if the push function is correctly pushing elements to the stack.
 */
-TEST(stack, push) {
+TEST(StackTest, testPush) {
   int stack_capacity = 5;
   Stack *stack = __stack__(stack_capacity);
 
@@ -21,7 +21,7 @@ TEST(stack, push) {
   Tests if the stack_is_full function can detect if the stack has more elements
   than its capacity.
 */
-TEST(stack, stack_is_full) {
+TEST(StackTest, testStackIsFull) {
   int stack_capacity = 5;
   Stack *stack = __stack__(stack_capacity);
 
@@ -36,7 +36,7 @@ TEST(stack, stack_is_full) {
   Tests if the stack_is_full function can detect if the stack has less elements
   than its capacity.
 */
-TEST(stack, stack_is_not_full) {
+TEST(StackTest, testStackIsNotFull) {
   int stack_capacity = 5;
   Stack *stack = __stack__(stack_capacity);
 
@@ -48,7 +48,7 @@ TEST(stack, stack_is_not_full) {
 /*
   Tests if the pop function is correctly pushing elements to the stack.
 */
-TEST(stack, pop) {
+TEST(StackTest, testPop) {
   int stack_capacity = 5;
   Stack *stack = __stack__(stack_capacity);
 
@@ -61,7 +61,7 @@ TEST(stack, pop) {
 /*
   Tests if the stack_is_empty function can detect if the stack has no elements.
 */
-TEST(stack, stack_is_empty) {
+TEST(StackTest, testStackIsEmpty) {
   int stack_capacity = 5;
   Stack *stack = __stack__(stack_capacity);
 
@@ -79,7 +79,7 @@ TEST(stack, stack_is_empty) {
 /*
   Tests if the stack_is_empty function can detect if the stack has elements.
 */
-TEST(stack, stack_is_not_empty) {
+TEST(StackTest, testStackIsNotEmpty) {
   int stack_capacity = 5;
   Stack *stack = __stack__(stack_capacity);
 
@@ -91,7 +91,7 @@ TEST(stack, stack_is_not_empty) {
 /*
   Tests if the push_and_test function can push an element to a non-full stack.
 */
-TEST(stack, push_and_test) {
+TEST(StackTest, testPushAndTest) {
   int stack_capacity = 5;
   bool stack_overflow = false;
   Stack *stack = __stack__(stack_capacity);
@@ -107,7 +107,7 @@ TEST(stack, push_and_test) {
   Tests if the push_and_test function can detect if there is a stack overflow,
   i.e. tried to push more elements than the stack's capacity.
 */
-TEST(stack, push_and_test_overflow) {
+TEST(StackTest, testPushAndTestOverflow) {
   int stack_capacity = 5;
   bool stack_overflow = false;
   Stack *stack = __stack__(stack_capacity);
@@ -121,7 +121,7 @@ TEST(stack, push_and_test_overflow) {
 /*
   Tests if the pop_and_test function can pop an element to a non-empty stack.
 */
-TEST(stack, pop_and_test) {
+TEST(StackTest, testPopAndTest) {
   int stack_capacity = 5;
   bool stack_overflow, stack_underflow = false;
   Stack *stack = __stack__(stack_capacity);
@@ -137,7 +137,7 @@ TEST(stack, pop_and_test) {
   Tests if the pop_and_test function can detect if there is a stack underflow,
   i.e. tried to pop an element from an empty stack.
 */
-TEST(stack, pop_and_test_underflow) {
+TEST(StackTest, testPopAndTestUnderflow) {
   int stack_capacity = 5;
   bool stack_underflow = false;
   Stack *stack = __stack__(stack_capacity);
