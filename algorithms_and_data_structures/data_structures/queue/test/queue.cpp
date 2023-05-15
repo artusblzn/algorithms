@@ -139,3 +139,29 @@ TEST(queue, dequeue_and_test_underflow) {
 
   ASSERT_TRUE(queue_underflow);
 }
+
+/*
+Tests if the enqueue e dequeue functions correctly use the queue's circular
+aspect.
+*/
+TEST(queue, circular_queue) {
+  int queue_capacity = 5;
+  bool queue_overflow = false, queue_underflow = false;
+  Queue *queue = __queue__(queue_capacity);
+
+  /* Fills the queue. */
+  for (int i = 0; i < queue_capacity; i++) {
+    enqueue_and_test(queue, 1, &queue_overflow);
+  }
+  
+  dequeue_and_test(queue, &queue_underflow); // Dequeues the first element.
+  enqueue_and_test(
+      queue, 2,
+      &queue_overflow); // Enqueues an element on the first empty space.
+
+
+
+  ASSERT_EQ(queue->items[queue->rear], 2);
+  ASSERT_EQ(queue->front, 1);
+  ASSERT_EQ(queue->rear, 0);
+}

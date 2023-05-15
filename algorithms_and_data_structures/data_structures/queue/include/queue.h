@@ -5,7 +5,7 @@
 
 typedef struct queue {
   int *items;
-  int front, rear, capacity;
+  int front, rear, capacity, num_items;
 } Queue;
 
 Queue *__queue__(int queue_capacity);

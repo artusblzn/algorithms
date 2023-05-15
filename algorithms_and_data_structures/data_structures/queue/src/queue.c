@@ -17,20 +17,32 @@ Queue *__queue__(int queue_capacity) {
   queue->front = 0;
   queue->rear = -1;
   queue->capacity = queue_capacity;
+  queue->num_items = 0;
 
   return queue;
 }
 
-void enqueue(Queue *queue, int item) { queue->items[++queue->rear] = item; }
+void enqueue(Queue *queue, int item) {
+  queue->num_items++;
+  queue->rear = (queue->rear + 1) % queue->capacity;
+  queue->items[queue->rear] = item;
+}
 
-bool queue_is_full(Queue *queue) { return queue->rear >= queue->capacity - 1; }
+bool queue_is_full(Queue *queue) { return queue->num_items >= queue->capacity; }
 
-int dequeue(Queue *queue) { return queue->items[queue->front++]; }
+int dequeue(Queue *queue) {
+  int old_front = queue->front;
 
-bool queue_is_empty(Queue *queue) { return queue->rear < queue->front; }
+  queue->front = (queue->front + 1) % queue->capacity;
+  queue->num_items--;
+  return queue->items[old_front];
+}
+
+bool queue_is_empty(Queue *queue) { return queue->num_items == 0; }
 
 void enqueue_and_test(Queue *queue, int item, bool *queue_overflow) {
-  if (*queue_overflow = queue_is_full(queue)) {
+  *queue_overflow = queue_is_full(queue);
+  if (*queue_overflow) {
     return;
   }
   enqueue(queue, item);
