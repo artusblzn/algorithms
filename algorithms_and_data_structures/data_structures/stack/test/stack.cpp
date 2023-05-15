@@ -29,7 +29,7 @@ TEST(stack, stack_is_full) {
     push(stack, i);
   }
 
-  ASSERT_EQ(stack_is_full(stack), true);
+  ASSERT_TRUE(stack_is_full(stack));
 }
 
 /*
@@ -42,7 +42,7 @@ TEST(stack, stack_is_not_full) {
 
   push(stack, 1);
 
-  ASSERT_EQ(stack_is_full(stack), 0);
+  ASSERT_FALSE(stack_is_full(stack));
 }
 
 /*
@@ -73,7 +73,7 @@ TEST(stack, stack_is_empty) {
     pop(stack);
   }
 
-  ASSERT_EQ(stack_is_empty(stack), true);
+  ASSERT_TRUE(stack_is_empty(stack));
 }
 
 /*
@@ -85,7 +85,7 @@ TEST(stack, stack_is_not_empty) {
 
   push(stack, 1);
 
-  ASSERT_EQ(stack_is_empty(stack), false);
+  ASSERT_FALSE(stack_is_empty(stack));
 }
 
 /*
@@ -93,12 +93,12 @@ TEST(stack, stack_is_not_empty) {
 */
 TEST(stack, push_and_test) {
   int stack_capacity = 5;
-  int stack_overflow = false;
+  bool stack_overflow = false;
   Stack *stack = __stack__(stack_capacity);
 
   push_and_test(stack, 1, &stack_overflow);
 
-  ASSERT_EQ(stack_overflow, false);
+  ASSERT_FALSE(stack_overflow);
   ASSERT_EQ(stack->items[stack->top], 1);
   ASSERT_EQ(stack->top, 0);
 }
@@ -109,13 +109,13 @@ TEST(stack, push_and_test) {
 */
 TEST(stack, push_and_test_overflow) {
   int stack_capacity = 5;
-  int stack_overflow = false;
+  bool stack_overflow = false;
   Stack *stack = __stack__(stack_capacity);
 
   for (int i = 0; i <= stack_capacity; i++) {
     push_and_test(stack, i, &stack_overflow);
   }
-  ASSERT_EQ(stack_overflow, true);
+  ASSERT_TRUE(stack_overflow);
 }
 
 /*
@@ -123,14 +123,14 @@ TEST(stack, push_and_test_overflow) {
 */
 TEST(stack, pop_and_test) {
   int stack_capacity = 5;
-  int stack_overflow, stack_underflow = false;
+  bool stack_overflow, stack_underflow = false;
   Stack *stack = __stack__(stack_capacity);
 
   push_and_test(stack, 1, &stack_overflow);
 
   ASSERT_EQ(pop_and_test(stack, &stack_underflow), 1);
   ASSERT_EQ(stack->top, -1);
-  ASSERT_EQ(stack_underflow, false);
+  ASSERT_FALSE(stack_underflow);
 }
 
 /*
@@ -139,10 +139,10 @@ TEST(stack, pop_and_test) {
 */
 TEST(stack, pop_and_test_underflow) {
   int stack_capacity = 5;
-  int stack_underflow = false;
+  bool stack_underflow = false;
   Stack *stack = __stack__(stack_capacity);
 
   pop_and_test(stack, &stack_underflow);
 
-  ASSERT_EQ(stack_underflow, true);
+  ASSERT_TRUE(stack_underflow);
 }
