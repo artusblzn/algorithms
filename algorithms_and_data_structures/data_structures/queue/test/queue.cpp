@@ -7,7 +7,7 @@ extern "C" {
 /*
   Tests if the insert function can insert an item correctly in the queue.
 */
-TEST(queue, enqueue) {
+TEST(QueueTests, testEnqueue) {
   int queue_capacity = 5;
   Queue *queue = __queue__(queue_capacity);
 
@@ -22,7 +22,7 @@ TEST(queue, enqueue) {
   Tests if the queue_is_full function can detect a queue is full, i.e. there
   were inserted a number of elements equal its capacity.
 */
-TEST(queue, queue_is_full) {
+TEST(QueueTests, testQueueIsFull) {
   int queue_capacity = 5;
   Queue *queue = __queue__(queue_capacity);
 
@@ -37,7 +37,7 @@ TEST(queue, queue_is_full) {
   Tests if the queue_is_full function can detect a queue is not full, i.e. there
   were inserted less elements than its capacity.
 */
-TEST(queue, queue_is_not_full) {
+TEST(QueueTests, testQueueIsNotFull) {
   int queue_capacity = 5;
   Queue *queue = __queue__(queue_capacity);
 
@@ -49,7 +49,7 @@ TEST(queue, queue_is_not_full) {
 /*
   Tests if the insert function can remove an item correctly from the queue.
 */
-TEST(queue, dequeue) {
+TEST(QueueTests, testDequeue) {
   int queue_capacity = 5;
   Queue *queue = __queue__(queue_capacity);
 
@@ -64,7 +64,7 @@ TEST(queue, dequeue) {
   Tests if the queue_is_empty function can detect a queue is empty, i.e. there
   is no elements in a queue.
 */
-TEST(queue, queue_is_empty) {
+TEST(QueueTests, testQueueIsEmpty) {
   int queue_capacity = 5;
   Queue *queue = __queue__(queue_capacity);
 
@@ -75,7 +75,7 @@ TEST(queue, queue_is_empty) {
   Tests if the queue_is_empty function can detect a queue is not empty, i.e.
   there is elements in a queue.
 */
-TEST(queue, queue_is_not_empty) {
+TEST(QueueTests, testQueueIsNotEmpty) {
   int queue_capacity = 5;
   Queue *queue = __queue__(queue_capacity);
 
@@ -85,7 +85,7 @@ TEST(queue, queue_is_not_empty) {
 }
 
 /* Test if the enqueue_and_test function can insert an element in a queue.*/
-TEST(queue, enqueue_and_test) {
+TEST(QueueTests, testEnqueueAndTest) {
   int queue_capacity = 5;
   bool queue_overflow = false;
   Queue *queue = __queue__(queue_capacity);
@@ -102,7 +102,7 @@ TEST(queue, enqueue_and_test) {
 
 /* Test if the enqueue_and_test function can detect a possible overflow when
  * trying to insert an element in a queue.*/
-TEST(queue, enqueue_and_test_overflow) {
+TEST(QueueTests, testEnqueueAndTestOverflow) {
   int queue_capacity = 5;
   bool queue_overflow = false;
   Queue *queue = __queue__(queue_capacity);
@@ -115,7 +115,7 @@ TEST(queue, enqueue_and_test_overflow) {
 }
 
 /* Test if the enqueue_and_test function can remove an element in a queue.*/
-TEST(queue, dequeue_and_test) {
+TEST(QueueTests, testDequeueAndTest) {
   int queue_capacity = 5;
   bool queue_overflow = false, queue_underflow = false;
   Queue *queue = __queue__(queue_capacity);
@@ -130,7 +130,7 @@ TEST(queue, dequeue_and_test) {
 
 /* Test if the enqueue_and_test function can detect and underflow while trying
  * to remove an element from an empty queue.*/
-TEST(queue, dequeue_and_test_underflow) {
+TEST(QueueTests, testDequeueAndTestUnderflow) {
   int queue_capacity = 5;
   bool queue_underflow = false;
   Queue *queue = __queue__(queue_capacity);
@@ -144,7 +144,7 @@ TEST(queue, dequeue_and_test_underflow) {
 Tests if the enqueue e dequeue functions correctly use the queue's circular
 aspect.
 */
-TEST(queue, circular_queue) {
+TEST(QueueTests, testCircularQueue) {
   int queue_capacity = 5;
   bool queue_overflow = false, queue_underflow = false;
   Queue *queue = __queue__(queue_capacity);
@@ -153,13 +153,11 @@ TEST(queue, circular_queue) {
   for (int i = 0; i < queue_capacity; i++) {
     enqueue_and_test(queue, 1, &queue_overflow);
   }
-  
+
   dequeue_and_test(queue, &queue_underflow); // Dequeues the first element.
   enqueue_and_test(
       queue, 2,
       &queue_overflow); // Enqueues an element on the first empty space.
-
-
 
   ASSERT_EQ(queue->items[queue->rear], 2);
   ASSERT_EQ(queue->front, 1);
