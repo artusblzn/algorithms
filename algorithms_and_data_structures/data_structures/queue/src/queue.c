@@ -37,8 +37,9 @@ void enqueue_and_test(Queue *queue, int item, bool *queue_overflow) {
 }
 
 int dequeue_and_test(Queue *queue, bool *queue_underflow) {
-  if (*queue_underflow = queue_is_empty(queue)) {
-    return;
+  *queue_underflow = queue_is_empty(queue);
+  if (*queue_underflow) {
+    return -1;
   }
   return dequeue(queue);
 }
